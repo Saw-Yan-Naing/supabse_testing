@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_testing/constants/secure_storage_constants.dart';
 
+import 'features/auth/presentation/login.dart';
 import 'utils/secure_storage.dart';
 import 'utils/supabase_wrapper/supabase_wrapper.dart';
+
+final navigationKey = GlobalKey<NavigatorState>();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,9 +48,10 @@ class _MainAppState extends ConsumerState<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+      navigatorKey: navigationKey,
+      home: const Material(child: LoginScreen()),
     );
   }
 }
