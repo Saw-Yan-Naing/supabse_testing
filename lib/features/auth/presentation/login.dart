@@ -72,7 +72,7 @@ class LoginScreen extends HookWidget {
 
             Consumer(
               builder:
-                  (_, ref, __) => ElevatedButton(
+                  (cxt, ref, __) => ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: WidgetStatePropertyAll(Colors.purple),
                       shape: WidgetStatePropertyAll(
@@ -91,18 +91,22 @@ class LoginScreen extends HookWidget {
                                 password: passwordController.text,
                               )
                               .then((_) {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (_) => HomeScreen(),
-                                  ),
-                                );
+                                if (cxt.mounted) {
+                                  Navigator.of(cxt).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (_) => HomeScreen(),
+                                    ),
+                                  );
+                                }
                               });
                         }
                       } catch (e, st) {
-                        showDialog(
-                          context: context,
-                          builder: (_) => DialogUtils.errorDialog(msg: "$e"),
-                        );
+                        if (cxt.mounted) {
+                          showDialog(
+                            context: cxt,
+                            builder: (_) => DialogUtils.errorDialog(msg: "$e"),
+                          );
+                        }
                       }
                     },
                     child: Text("Login", style: TextStyle(color: Colors.white)),

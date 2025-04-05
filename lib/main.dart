@@ -27,6 +27,7 @@ void _initialize(WidgetRef ref) async {
         SecureStorageConstants.projectUrl,
         "https://sieieasmvtxgujfwwafs.supabase.co",
       );
+   ref.read(supabaseWrapperProvider).initialize();
 }
 
 class MainApp extends ConsumerStatefulWidget {
@@ -41,7 +42,6 @@ class _MainAppState extends ConsumerState<MainApp> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initialize(ref);
-      ref.read(supabaseWrapperProvider).initialize();
     });
     super.initState();
   }

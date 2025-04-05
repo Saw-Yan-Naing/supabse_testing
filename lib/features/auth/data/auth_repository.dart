@@ -28,7 +28,12 @@ class AuthReposImpl extends _AuthRepository {
     try {
       final supabase = ref.read(supabaseClientProvider);
 
-      await supabase.auth.signInWithPassword(email: email, password: password);
+      final response = await supabase.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      debugPrint("response===> $response");
     } catch (e) {
       debugPrint("$e");
       rethrow;
